@@ -106,14 +106,13 @@ function onlynumber(){
  }
  onlynumber();
 
- function onlyletter(){
+  function nospecialcharacters(){ //removes special characters but keep Greek
     $('#firstname,#lastname').on('change keyup', function() {
-      var onlyletters = $(this).val().replace(/\d/g,'');
-      $(this).val(onlyletters);
-    });
+        var nospecialcharacters = $(this).val().replace(/[^\u0370-\u03FF\w\s]/mg, '\n','');
+        $(this).val(nospecialcharacters);
+      });  
   }
-  onlyletter();
- 
+  nospecialcharacters();
 //on click clear input
   function clearinput(){    
   $('input').each(function(index) {
@@ -401,6 +400,7 @@ function mainmka(){
          $(amkabutton).remove();
 
 }
+
 
 
 
