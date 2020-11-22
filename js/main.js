@@ -249,7 +249,6 @@ function showamka(){
             amkabutton.insertAfter( "#cbutton" ).show();
             amka_button_needs_Update = false;
         }
-        //09037902450 
     }
     $('.rs-select2 .select2-container .select2-selection--single .select2-selection__rendered').removeClass().addClass('verified');
     $('select').attr("disabled", "disabled");
@@ -268,7 +267,6 @@ function showafm(){
             afmbutton.insertAfter( "#cbutton" ).show();
             afm_button_needs_Update = false;
         }
-        //112591766
     }        
 }
 
@@ -330,7 +328,6 @@ function amkaverify(){
         else if ((my_date==amka.substring(0,6))&&(checkGender())){
             showamka();
         }
-       // 09037902450
     }
     else {
         $('#result').empty().append(`<span class="red">Το ΑΜΚΑ: ${amka} δεν είναι έγκυρο</span>`);
@@ -404,9 +401,6 @@ function mainmka(){
          $(amkabutton).remove();
 
 }
-//112591766
-
-// 09037902450
 
 
 
