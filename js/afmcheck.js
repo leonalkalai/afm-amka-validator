@@ -17,7 +17,7 @@ function afmcheck() {
         sum += afm[i] * Math.pow(2, 8-i);
     }
     var result = sum % 11;
-    if((afm.length<9) || (sum == 0)){ // αν ο αριθμός είναι μικρότερος του 0 ή αν το όλα τα ψηφία είναι 0
+    if((afm.length!==9) || (sum == 0)){ // αν ο αριθμός είναι μικρότερος του 0 ή αν το όλα τα ψηφία είναι 0
         return false;
     }
     else if ((result == afm.split("").pop())||((result == 0 || result == 10) && afm.split("").pop() == 0)){ // ελέγχει αν το αποτέλεσμα είναι ίσο με το τελευταίο ψηφίο του ΑΦΜ

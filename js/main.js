@@ -3,8 +3,8 @@ $.getScript("js/afmcheck.js", function() {});
 $.getScript("js/amkacheck.js", function() {});
 
 let afmbutton,amkabutton;
-let amka_button_needs_Update = true;
 let afm_button_needs_Update = true;
+let amka_button_needs_Update = true;
 
 $('#app,#home').hide(); 
 
@@ -130,6 +130,11 @@ clearinput()
             $(this).addClass('textgrowth');
             $('#result').empty().append(`<span class="emptyfield">παρακαλώ συμπληρώστε τα απαραίτητα πεδία</span>`);
         }
+        else if( $(this).val().length!==9) {     
+            $(this).addClass("red");
+            $(this).addClass('textgrowth');
+            $('#result').empty().append(`<span class="emptyfield">Μη έγκυρος αριθμός ψηφίων ΑΦΜ, o ΑΦΜ αποτελείται από 9 ψηφία</span>`);
+        }
         else{
             $(this).removeClass('red textgrowth').addClass('verified');
         }
@@ -225,7 +230,7 @@ function showamka(){
         //$('#cbutton').after(amkabutton); 
         amkabutton.hide();
         if (amka_button_needs_Update) {
-            amkabutton.insertAfter( "#cbutton" ).show();
+            amkabutton.insertAfter("#cbutton").show();
             amka_button_needs_Update = false;
         }
     }
@@ -243,14 +248,18 @@ function showafm(){
        // $('#cbutton').after(afmbutton);
        afmbutton.hide(); 
        if (afm_button_needs_Update) {
-            afmbutton.insertAfter( "#cbutton" ).show();
+            afmbutton.insertAfter("#cbutton").show();
             afm_button_needs_Update = false;
         }
     }        
 }
 
 function afmverify(){
-    if (afmcheck()) {
+    if(afm.length!==9) {     
+        $('#result').empty().append(`<span class="red">Μη έγκυρος αριθμός ψηφίων ΑΦΜ, o ΑΦΜ αποτελείται από 9 ψηφία</span>`);
+    }
+    else if (afmcheck()) {
+        afm_button_needs_Update = true;
         showafm();
     }
     else {
@@ -298,9 +307,9 @@ function amkaverify(){
             wrongboth()
        }
         else if(checkGender()==false){
-         wronggender();
+            wronggender();
         }
-       else if (my_date!==amka.substring(0,6)){
+       else if(my_date!==amka.substring(0,6)){
             wrongdate();           
         }
         else if ((my_date==amka.substring(0,6))&&(checkGender())){
@@ -333,7 +342,7 @@ function verifyamka(){
     getdate();
     checkamkaentry();
     checkGender()
-    if ((($('#input_amka').val()) !== "")&& ($("#datepicker").val() !== ''))
+    if (($('#input_amka').val()) !== "")
     {  
         amkaverify();
     } 
