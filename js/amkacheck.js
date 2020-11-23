@@ -4,16 +4,18 @@
 και το τελευταίο ψηφίο είναι ένα στοιχείο ελέγχου ψηφίο (z).
 Το φύλο του ατόμου κωδικοποιείται στο τελευταίο ψηφίο του αριθμού ακολουθίας (y του xxxy):
 αντιστοιχίζονται ακόμη και ψηφία σε γυναίκες και περίεργα ψηφία αντιστοιχίζονται σε άνδρες*/
-
+let amka;
+//  function to get user input for amka
+function getamka(){
+    amka = $('#input_amka').val();
+    return amka.toString();  
+}
 function amkacheck() {   
-    let amka = $('#input_amka').val();
-    let amka_length = $('#input_amka').val().length;
-    if((amka_length !== 11) || (amka == 00000000000)){
+    if((amka.length !== 11) || (amka == "00000000000")){
         //Το ΑΜΚΑ που δώσατε δεν είναι έγκυρο
         return false
     } 
     else{
-        amka = parseInt(amka);
         if(luhnCheck(amka)){
             return true //Το ΑΜΚΑ που δώσατε είναι έγκυρο
         }
@@ -22,8 +24,8 @@ function amkacheck() {
             return false
         }
     }
-   
 }
+
 
 
 

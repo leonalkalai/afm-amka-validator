@@ -12,7 +12,6 @@ setTimeout(() => {
     $('.square').addClass('squarevisible');
 }, 300); 
 
-
 function gohome() {
     amka_button_needs_Update = true;
     afm_button_needs_Update = true;
@@ -65,7 +64,6 @@ function chooseafm(){
     $('#app').show();  
 }
 
-
 function chooseamka(){
     $('#cardheader h2').text('Έλεγχος ΑΜΚΑ');
     $('#info').html(
@@ -89,30 +87,24 @@ function chooseamka(){
     $('#app').show();  
 }
 
-
-//appends an "active" class to .popup and .popup-content when the "Open" button is clicked
+//information button for app (i)
 $(".open").on("click", function() {
     $(".popup-overlay, .popup-content").toggleClass("active");
     $('#info').toggle(); 
-  });
+});
   
-
 /* Όταν ο χρήστης πληκτρολογεί ελέγχει και αντικαθιστά την τιμή χρήστη και δεν επιτρέπει στον χρήστη να πληκτρολογεί κείμενο */
-function onlynumber(){
-   $('#input_afm,#input_amka').on('change keyup', function() {
-     var onlynumbers = $(this).val().replace(/[^0-9]/g, '');
-     $(this).val(onlynumbers);
-   });
- }
- onlynumber();
-
-  function nospecialcharacters(){ //removes special characters but keep Greek
+(function (){
     $('#firstname,#lastname').on('change keyup', function() {
         var nospecialcharacters = $(this).val().replace(/[^\u0370-\u03FF\w\s]/mg, '\n','');
         $(this).val(nospecialcharacters);
-      });  
-  }
-  nospecialcharacters();
+    });
+    $('#input_afm,#input_amka').on('change keyup', function() {
+        var onlynumbers = $(this).val().replace(/[^0-9]/g, '');
+        $(this).val(onlynumbers);
+      });   
+})();
+
 //on click clear input
   function clearinput(){    
   $('input').each(function(index) {
@@ -126,13 +118,13 @@ function onlynumber(){
         });
     });
   }
-  clearinput()
+clearinput()
 
   let thisid;
   let thisval;
   let thisplaceholder;
   function checkafmentry(){
-    $('#input_afm,#firstname,#lastname').each(function(){
+    $('#input_afm').each(function(){
         if( $(this).val()=== "") {    
             $(this).addClass("red");
             $(this).addClass('textgrowth');
@@ -148,7 +140,7 @@ function onlynumber(){
 
  /* function to alert user if no value */
 function checkamkaentry(){
-    $('#input_amka,#firstname,#lastname,#datepicker').each(function(){
+    $('#input_amka,#datepicker').each(function(){
         if( $(this).val()=== "") {    
             $(this).addClass("red");
             $(this).addClass('textgrowth');
@@ -172,17 +164,6 @@ function checkamkaentry(){
     });
     
 } 
- //  function to get user input for afm
- function getafm(){
-    afm = $('#input_afm').val();
-    return afm;    
-}
-//  function to get user input for amka
-function getamka(){
-    amka = $('#input_amka').val();
-    return amka;    
-}
-
 
 function clearall(){
     $('#app')[0].reset();
@@ -222,7 +203,6 @@ function getdate(){
     my_date = my_date_string.substring(0,4) + my_date_string.substring(6,8);
     return my_date;
 }
-
 
 function checkGender(){
     let selectedoption = $('#selectgender :selected').text();
@@ -311,21 +291,20 @@ function wrongboth(){
     $('#datepicker').addClass('red textgrowth').removeClass('verified');
 }
 
-
 function amkaverify(){
     if (amkacheck())         
     {
         if((checkGender()==false)&&(my_date!==amka.substring(0,6))){
             wrongboth()
-        }
+       }
         else if(checkGender()==false){
-          wronggender();
+         wronggender();
         }
-        else if (my_date!==amka.substring(0,6)){
+       else if (my_date!==amka.substring(0,6)){
             wrongdate();           
         }
         else if ((my_date==amka.substring(0,6))&&(checkGender())){
-            showamka();
+           showamka();
         }
     }
     else {
@@ -341,10 +320,9 @@ function verifyafm(){
     getafm();
     afmcheck();
     checkafmentry();
-    if  ((($('#firstname').val())&&($('#lastname').val())&&($('#input_afm').val()) !== ""))
+    if  ((($('#input_afm').val()) !== ""))
     {  
         afmverify();
-
     } 
 }
 
@@ -353,13 +331,11 @@ function verifyamka(){
     $('.zmdi').hide();
     getamka();
     getdate();
-    amkacheck();
     checkamkaentry();
     checkGender()
-    if  ((($('#firstname').val())&&($('#lastname').val())&&($('#input_amka').val()) !== "")&& ($("#datepicker").val() !== ''))
+    if ((($('#input_amka').val()) !== "")&& ($("#datepicker").val() !== ''))
     {  
         amkaverify();
-
     } 
 } 
 
@@ -374,7 +350,6 @@ function mainafm(){
             thisval = $(this).val();
                 $(this).parent().append(`<span id="${thisid}" class="verified">${thisplaceholder}:&emsp;${thisval}</span>`); 
          });
-         
          $('#app').addClass('aligncenter');
          $('#afmbutton,#cbutton,#fbutton').hide();
          $('#fbutton').addClass('disableclick');
@@ -393,12 +368,10 @@ function mainmka(){
             thisval = $(this).val();
                 $(this).parent().append(`<span id="${thisid}" class="verified">${thisplaceholder}:&emsp;${thisval}</span>`); 
          });
-         
          $('#app').addClass('aligncenter');
          $('#fbutton').addClass('disableclick');
          $('#amkabutton,#cbutton,#fbutton').hide();
          $(amkabutton).remove();
-
 }
 
 

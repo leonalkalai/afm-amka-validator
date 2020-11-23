@@ -3,15 +3,20 @@
 Το υπόλοιπο του αθροίσματος με το 11 πρέπει να είναι ίσο με το τελευταίο ψηφίο του ΑΦΜ.
 (Το τελευταίο ψηφίο δεν αποτελεί παράγοντας στον υπολογισμό του αθροίσματος) */
  
+let afm;
+ //  function to get user input for afm
+ function getafm(){
+    afm = $('#input_afm').val();
+    return afm;    
+}
+
 function afmcheck() { 
     let sum = 0;
-    var userinput = $('#input_afm').val();
-    let afm = userinput.split(",").join(",");
+    afm = afm.split(",").join(",");
     for (let i=0;i<afm.length-1;++i){
         sum += afm[i] * Math.pow(2, 8-i);
     }
     var result = sum % 11;
-    console.log(afm.split("").pop())
     if((afm.length<9) || (sum == 0)){ // αν ο αριθμός είναι μικρότερος του 0 ή αν το όλα τα ψηφία είναι 0
         return false;
     }
